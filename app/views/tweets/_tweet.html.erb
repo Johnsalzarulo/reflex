@@ -1,0 +1,11 @@
+<div class="tweet">
+  <h3><%= tweet.body %></h3>
+  <p>Likes <%= tweet.likes %><%= @like_count %></p>
+  <a href="#"
+    data-reflex="click->LikeReflex#like"
+    data-tweet="<%= tweet.id %>"
+  >Like This</a>
+  <small><%= link_to 'Show', tweet_path(tweet) %></small>
+  <small><%= link_to 'Edit', edit_tweet_path(tweet) %></small>
+  <small><%= link_to 'Destroy', tweet, method: :delete,  :remote => true %></small>
+</div>
