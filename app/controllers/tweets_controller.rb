@@ -30,7 +30,7 @@ class TweetsController < ApplicationController
     tweet = Tweet.create(tweet_params)
     cable_ready["timeline"].insert_adjacent_html(
       selector: "#timeline",
-      postiion: "afterbegin",
+      position: "afterbegin",
       html: render_to_string(partial: "tweet", locals: {tweet: tweet})
     )
     cable_ready.broadcast
