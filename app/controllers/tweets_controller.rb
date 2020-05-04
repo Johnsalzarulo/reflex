@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.all.order(created_at: :desc)
     @tweet = Tweet.new
   end
 
@@ -40,14 +40,13 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
   def update
-    respond_to do |format|
-      if @tweet.update(tweet_params)
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tweet }
-      else
-        format.html { render :edit }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
-      end
+    if @tweet.update(tweet_params)
+      cable_ready["timeline"].inner_html(
+        selector: "#tweet-#{@tweet.id}",
+        html: render_to_string(partial: "tweet", locals: {tweet: @tweet})
+      )
+      cable_ready.broadcast
+      redirect_to @tweet, notice: 'Tweet was successfully updated.'
     end
   end
 
