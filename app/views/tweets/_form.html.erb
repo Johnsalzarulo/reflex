@@ -12,13 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :body %>
-    <%= form.text_field :body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :likes %>
-    <%= form.number_field :likes %>
+    <%= form.label :body, html: {rows: 8} %>
+    <%= form.text_area :body %>
   </div>
 
   <div class="actions">

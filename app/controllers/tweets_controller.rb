@@ -41,11 +41,19 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1.json
   def update
     if @tweet.update(tweet_params)
+
       cable_ready["timeline"].inner_html(
         selector: "#tweet-#{@tweet.id}",
         html: render_to_string(partial: "tweet", locals: {tweet: @tweet})
       )
       cable_ready.broadcast
+
+      cable_ready["tweet_show_channel"].inner_html(
+        selector: "#tweet-text-#{@tweet.id}",
+        html: render_to_string(partial: "tweet_text", locals: {tweet: @tweet})
+      )
+      cable_ready.broadcast
+
       redirect_to @tweet, notice: 'Tweet was successfully updated.'
     end
   end

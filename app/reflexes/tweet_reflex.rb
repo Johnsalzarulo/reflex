@@ -40,4 +40,14 @@ class TweetReflex < ApplicationReflex
     )
     cable_ready.broadcast
   end
+
+  def update
+    tweet = Tweet.find(element.dataset[:id])
+    cable_ready["tweet-show"].text_content(
+      selector: "#tweet-#{tweet.id}",
+      likes: tweet.likes,
+      content: tweet.content
+    )
+    cable_ready.broadcast
+  end
 end

@@ -1,10 +1,9 @@
 import CableReady from "cable_ready";
 import consumer from "./consumer";
 
-consumer.subscriptions.create("TimelineChannel", {
+consumer.subscriptions.create("TweetShowChannel", {
   received(data) {
     if (data.cableReady) {
-      console.log("TimelineChannel data:", data);
       CableReady.perform(data.operations);
     }
   }

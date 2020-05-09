@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Body:</strong>
-  <%= @tweet.body %>
-</p>
+<strong>Body:</strong>
+<div id="tweet-text-<%= @tweet.id %>">
+  <%= render "tweets/tweet_text", tweet: @tweet %>
+</div>
 
 <p>
   <strong>Likes:</strong>

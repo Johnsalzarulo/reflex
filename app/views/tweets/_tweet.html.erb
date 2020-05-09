@@ -1,10 +1,13 @@
 <div class="tweet" id="tweet-<%= tweet.id %>">
   <h3><%= tweet.body %></h3>
   <%= link_to "#", data: {reflex: "click->TweetReflex#like", id: tweet.id} do %>
-    Like (<%= tag.span tweet.likes, id: "tweet-#{tweet.id}-likes"%>)
-  <% end %><br>
-  <small><%= link_to 'Edit', edit_tweet_path(tweet) %></small><br>
-  <small><%= link_to "#", data: {reflex: "click->TweetReflex#delete", id: tweet.id} do %>
+    Like <%= tag.span tweet.likes, id: "tweet-#{tweet.id}-likes"%>
+  <% end %>
+  <small>|  <%= link_to 'Edit', edit_tweet_path(tweet) %></small>
+  <small><%= link_to '|  Show', tweet_path(tweet) %></small>
+  <small>|  <%= link_to "#", data: {reflex: "click->TweetReflex#delete", id: tweet.id} do %>
     Delete
-  <% end %></small>
+  <% end %>
+  </small>
+  <hr>
 </div>

@@ -7,10 +7,3 @@
 <div id="timeline">
   <%= render partial: "tweet", collection: @tweets %>
 </div>
-
-<br>
-<a href="#"
-  data-reflex="click->CounterReflex#increment"
-  data-step="1"
-  data-count="<%= @count.to_i %>"
->Increment <%= @count.to_i %></a>
